@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>猫羽雫迷路啦～404</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* 基础重置：保证多设备样式一致 */
+    * {
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Comic Sans MS', 华文楷体, sans-serif;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ========== 双背景响应式（桌面/手机自动切换） ========== */
+    /* 桌面端背景（屏幕宽度≥768px） */
+    @media (min-width: 768px) {
+      body {
+        background: url('https://你的GitHub仓库地址/desktop-bg.png') center/cover no-repeat;
+      }
+    }
+    /* 手机端背景（屏幕宽度<768px） */
+    @media (max-width: 767px) {
+      body {
+        background: url('https://你的GitHub仓库地址/mobile-bg.png') center/cover no-repeat;
+      }
+    }
+
+    /* ========== 猫羽雫容器（漂浮动画+点击互动） ========== */
+    .neko-container {
+      position: absolute;
+      top: 30%; 
+      left: 50%;
+      transform: translateX(-50%);
+      animation: float 3s infinite ease-in-out; /* 漂浮周期3秒，可改5s */
+      z-index: 10;
+      cursor: pointer;
+    }
+    .neko {
+      width: 200px; /* 桌面端角色宽度 */
+      height: auto;
+    }
+    /* 漂浮动画（上下浮动） */
+    @keyframes float {
+      0% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-20px); }
+      100% { transform: translateX(-50%) translateY(0); }
+    }
+    /* 手机端角色缩放 */
+    @media (max-width: 767px) {
+      .neko {
+        width: 150px;
+      }
+    }
+
+    /* ========== 404文字（霓虹光效） ========== */
+    .error-404 {
+      font-size: 60px;
+      color: #ffc0cb; /* 猫羽雫主题粉 */
+      text-shadow: 0 0 10px #fff, 0 0 20px #ffc0cb;
+      animation: glow 2s infinite alternate;
+      z-index: 10;
+      margin-top: -80px; /* 垂直位置微调 */
+    }
+    @keyframes glow {
+      to { text-shadow: 0 0 20px #fff, 0 0 30px #ffc0cb; }
+    }
+
+    /* ========== 樱花下落（从顶部飘到底部+渐隐） ========== */
+    .sakura {
+      position: absolute;
+      width: 10px;
+      height: 15px;
+      background: #ffb6c1; /* 樱花粉 */
+      border-radius: 50% 50% 0 0;
+      animation: fall 5s linear infinite;
+      z-index: 1;
+      top: -10px; /* 初始在视口外顶部 */
+    }
+    @keyframes fall {
+      to { 
+        top: 100vh; /* 飘到视口外底部 */
+        opacity: 0; /* 飘落末尾渐隐（更自然） */
+      }
+    }
+
+    /* ========== 搜索框（猫咪主题+响应式） ========== */
+    .search-box {
+      position: absolute;
+      bottom: 10%;
+      background: rgba(255,255,255,0.8);
+      padding: 15px 20px;
+      border-radius: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      z-index: 10;
+      width: 80%;   /* 手机端自动缩放 */
+      max-width: 400px; /* 桌面端最大宽度 */
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .search-box input {
+      flex: 1;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 20px;
+      outline: none;
+    }
+    .search-box button {
+      border: none;
+      background: #ffc0cb;
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    /* ========== 点击彩蛋（摇尾巴+台词气泡） ========== */
+    .neko-container:active {
+      animation: shake 0.5s forwards; /* 摇尾巴动画 */
+    }
+    .neko-container:active::after {
+      content: "喵？这里不是猫窝哦～🐾"; /* 替换成你想要的台词 */
+      position: absolute;
+      bottom: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff;
+      padding: 10px 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      font-size: 14px;
+    }
+    @keyframes shake {
+      0% { transform: translateX(-50%) rotate(0); }
+      25% { transform: translateX(-50%) rotate(5deg); }
+      50% { transform: translateX(-50%) rotate(-5deg); }
+      75% { transform: translateX(-50%) rotate(5deg); }
+      100% { transform: translateX(-50%) rotate(0); }
+    }
+
+    /* ========== 手机端专项适配 ========== */
+    @media (max-width: 767px) {
+      .error-404 {
+        font-size: 40px;
+        margin-top: -50px;
+      }
+      .search-box {
+        flex-direction: column; /* 手机端垂直排列 */
+        align-items: stretch;
+        padding: 10px;
+      }
+      .search-box input {
+        margin-bottom: 10px;
+      }
+    }
+
+    /* 返回首页按钮样式 */
+    .home-link {
+      position: absolute;
+      bottom: 3%;
+      text-decoration: none;
+      color: #fff;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <!-- 404霓虹文字 -->
+  <h1 class="error-404">404</h1>
+
+  <!-- 猫羽雫容器（替换成你GitHub仓库的PNG路径） -->
+  <div class="neko-container">
+    <img src="https://你的GitHub仓库地址/neko-shizuku.png" alt="猫羽雫" class="neko">
+  </div>
+
+  <!-- 猫咪搜索框 -->
+  <div class="search-box">
+    <input type="text" placeholder="喵～要找什么？">
+    <button>搜索</button>
+  </div>
+
+  <!-- 返回首页按钮（替换成你站点的首页链接） -->
+  <a href="/" class="home-link">← 回喵窝</a>
+
+  <script>
+    // 动态生成樱花花瓣（每0.8秒生成一朵，5秒后自动消失）
+    function createSakura() {
+      const sakura = document.createElement('div');
+      sakura.className = 'sakura';
+      sakura.style.left = Math.random() * 100 + 'vw'; // 随机水平位置
+      document.body.appendChild(sakura);
+      setTimeout(() => sakura.remove(), 5000); // 避免内存溢出
+    }
+    setInterval(createSakura, 800);
+  </script>
+</body>
+</html>
